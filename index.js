@@ -99,15 +99,14 @@ app.post('/login', async (req, res) => {
 
         console.log('match');
         
-        delete result['password'];
-        
+        result.password = undefined;
+
+        console.log(result, result.password );
         const token = jsonwebtoken.sign({
            data: result,
            role: 'User'
         }, 'supersecretToken', { expiresIn: '7d' });
         
-        console.log('token -> ', token)
-
         res.send({ message: 'Successfully Logged in', token: token });
       } 
       
